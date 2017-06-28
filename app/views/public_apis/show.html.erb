@@ -1,0 +1,36 @@
+<p>
+  <% @table_names.each do |table_name| %>
+    <%= link_to table_name, public_api_path(table_name) %> |
+  <% end %>
+</p>
+
+<%= title ["Public apis", public_apis_path], @table_name %>
+
+<div class="box tabular">
+  <%= form_tag public_api_path(params[:table_name]), :method => :get do %>
+    <p>
+      <% @table_name.classify.constantize.column_names.each.with_index do |column_name, index| %>
+          <!-- <li> -->
+            <%= check_box_tag 'column_names[]', column_name,
+            params[:column_names].present? ? params[:column_names].include?(column_name) : false -%><%= column_name -%>
+            <br>
+          <!-- </li> -->
+      <% end %>
+    </p>
+    <p>
+      <%= label_tag "Conditions" %>
+      <%= text_area_tag("query", params[:query]) %>
+    </p>
+
+    <p>
+      <%= label_tag "Format" %>
+      <%= select_tag("format_type", options_for_select([["JSON", "json"], ["XML", "xml"]], params[:format_type])) %>
+    </p>
+
+    <p><%= submit_tag "Get Link" %></p>
+  <% end %>
+</div>
+
+<h3 style="display: inline">Api link:</h3>
+<span>/public_apis/<%= @table_name %>/<b>[encoding of condition]</b>.json?column_names=<b>column1,column2,...</b></span><br>
+<a href="<%= @api_link %>" target="_blank"><%= @api_link%></a>

@@ -6,5 +6,7 @@ Redmine::Plugin.register :public_api do
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 
+  require 'admin_menu_hooks'
+
   menu :admin_menu, :public_api, { :controller => 'public_apis', :action => 'index' }, :caption => 'Public Api'
 end

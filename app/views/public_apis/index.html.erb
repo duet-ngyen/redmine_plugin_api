@@ -25,7 +25,18 @@ Click <a href="http://www.redmine.org/attachments/4875/modelo-1.0.1.png" target=
   <% end %>
 </div>
 
-
 <h3 style="display: inline">Api link:</h3><span>/public_apis/sql_query/result.json?sql_query=<b>[encoding of query]</b></span>
 <br>
 <a href="<%= @api_link %>" target="_blank"><%= @api_link%></a>
+
+<p>
+  <b>Note: The authentication can be done in 2 different ways:</b>
+  <ul>
+    <li>
+      using your regular login/password via HTTP Basic authentication. Test by command: $ curl "http://<b>[account:password]</b>@<b>[redmine_root_path]</b>/<b>[api_link]</b>"
+    </li>
+    <li>
+      pass your API key as a "X-Redmine-API-Key" HTTP header. You can find your API key on your account page ( /my/account ) when logged in, on the right-hand pane of the default layout.
+    </li>
+  </ul>
+</p>

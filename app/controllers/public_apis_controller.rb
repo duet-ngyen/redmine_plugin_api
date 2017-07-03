@@ -7,14 +7,12 @@ class PublicApisController < ApplicationController
   accept_rss_auth :api
   accept_api_auth :api
 
-  TABLE_NAMES = ["issues", "projects",
-      "project_memberships", "users",
+  TABLE_NAMES = ["issues", "projects", "users",
       "time_entries", "news",
       "issue_relations", "versions",
       "wiki_pages", "queries", "issue_statuses",
       "trackers", "enumerations",
-      "issue_categories", "roles",
-      "groups", "custom_fields"]
+      "issue_categories", "roles", "custom_fields"]
 
   def index
     @table_names = TABLE_NAMES

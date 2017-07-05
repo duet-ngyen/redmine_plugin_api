@@ -8,5 +8,6 @@ Redmine::Plugin.register :public_api do
 
   require 'admin_menu_hooks'
 
-  menu :admin_menu, :public_api, { :controller => 'public_apis', :action => 'index' }, :caption => 'Public Api'
+  menu :admin_menu, :public_api_v1, { :controller => 'public_apis', :action => 'index' }, :caption => 'API by sql'
+  menu :admin_menu, :public_api_v2, { :controller => 'apis', :action => 'index' }, :caption => 'API by endpoint'
 end

@@ -1,0 +1,13 @@
+<%= title ["Public apis", apis_path], "Edit API" %>
+
+Click <a href="http://www.redmine.org/attachments/4875/modelo-1.0.1.png" target="_blank"> Here</a> to see the Redmine database structure.
+<div class="box tabular">
+  <%= labelled_form_for @api do |f| %>
+    <%= error_messages_for @api %>
+
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <p>
+      <%= f.submit "Update" %>
+    </p>
+  <% end %>
+</div>

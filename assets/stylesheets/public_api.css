@@ -1,1 +1,2 @@
-#admin-menu a.public-api { background-image: url(../images/api_icon.png); }
+#admin-menu a.public-api-v1 { background-image: url(../images/sql_icon.png); }
+#admin-menu a.public-api-v2 { background-image: url(../images/api_icon.png); }

@@ -1,0 +1,10 @@
+  <p><%= f.text_field :name, :required => true, label: "Name" %></p>
+  <p><%= f.text_field :endpoint, :required => true, label: "Endpoint" %></p>
+  <p>
+    <%= f.text_area :query, :required => true, label: "Query", rows: 5 %><br>
+    <b>*Note:</b> Use <b>:param_name</b> as params need to be passed by user.<br>
+    <b>Example:</b> <br>
+        - select id, firstname from users where id >= :min_id and firstname like '%:firstname_to_search%'<br>
+        - select * from users where id IN (:ids)
+  </p>
+  <p><%= f.text_area :description, :required => true, label: "Description" %></p>

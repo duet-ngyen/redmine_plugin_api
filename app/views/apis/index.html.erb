@@ -1,0 +1,61 @@
+<%= title ["API by endpoint", apis_path], "API by endpoint" %>
+
+Click <a href="http://www.redmine.org/attachments/4875/modelo-1.0.1.png" target="_blank"> Here</a> to see the Redmine database structure.
+<div class="box tabular">
+  <%= labelled_form_for @api do |f| %>
+    <%= error_messages_for @api %>
+
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <p>
+      <%= f.submit "Add" %>
+    </p>
+  <% end %>
+</div>
+
+<h3>Api list</h3>
+<table class="list apis">
+  <thead><tr>
+  <th>No.</th>
+  <th>Name</th>
+  <th>Endpoint URL(Supported formats: json, xml)</th>
+  <!-- <th>Query</th> -->
+  <th>Description</th>
+  <th>Actions</th>
+  </tr></thead>
+  <tbody>
+<% @apis.each.with_index do |api, index| %>
+  <tr id="group-<%= api.id %>" class="<%= cycle 'odd', 'even' %>">
+    <td class="no"><%= index + 1 %></td>
+    <td class="name"><%= api.name %></td>
+    <td class="name"><%= api.endpoint_url %></td>
+    <!-- <td class="name"><%#= api.query %></td> -->
+    <td class="description"><%= api.description %></td>
+    <td>
+      <%= link_to "Edit", edit_api_path(api) %> |
+      <%= link_to("Delete", api_path(api),
+              :method => :delete,
+              :data => {:confirm => t("text_are_you_sure")}) %> |
+      <% if api.active? %>
+        <%= link_to "Deactive", update_status_api_path(api), method: :patch %>
+      <% else %>
+        <%= link_to "Active", update_status_api_path(api), method: :patch %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<p style="margin-top: 80px">
+  <b>Note: The authentication can be done in 2 different ways:</b>
+  <ul>
+    <li>
+      using your regular login/password via HTTP Basic authentication. <p>Test by command: $ curl "http://<b>[account:password]</b>@<b>[redmine_root_path]</b>/<b>[api_link]</b>"</p>
+      <p>Example: $ curl "http://admin:12341234@localhost:3000/public_apis/getUser/xml?user_id=123"
+    </li>
+    <li>
+      pass your API key as a "X-Redmine-API-Key" HTTP header. You can find your API key on your account page ( /my/account ) when logged in, on the right-hand pane of the default layout. <p>Test by command: $ curl --header "X-Redmine-API-Key: <b>[api_key]</b>" <b>[redmine_root_path]</b>/<b>[api_link]</b></p>
+      <p>Example: $ curl --header "X-Redmine-API-Key: 6d5e217dcae2971063f15c3ddf2c97e194cdf85" http://localhost:3000/public_apis/getUser/xml?user_id=1234</p>
+    </li>
+  </ul>
+</p>
